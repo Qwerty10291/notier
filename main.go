@@ -33,10 +33,17 @@ func main() {
 		panic(err)
 	}
 	DB = conn
+	router.Static("/static", "./static")
+	router.LoadHTMLFiles("templates/index.html")
+	router.GET("/", Index)
 	router.GET("/notes", GetNotesHandler)
 	router.POST("/notes", NewNoteHandler)
 	router.DELETE("/notes/:id", DeleteNotesHandler)
 	router.Run(fmt.Sprintf("%s:%s", config.Host, config.Port))
+}
+
+func Index(c *gin.Context){
+	c.HTML(http.StatusOK, "index.html", gin.H{})
 }
 
 func GetNotesHandler(c *gin.Context) {
