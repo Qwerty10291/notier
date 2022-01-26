@@ -5,7 +5,7 @@ async function LoadNotes(){
         console.log("notes loaded:", notes)
         return notes
     } catch (error) {
-
+        console.log("failed to load notes:", error)
     }
 }
 
@@ -22,7 +22,7 @@ async function CreateNote(text) {
         })
         let notes = await response.json()
         console.log("created note", notes)
-        return await response.json()
+        return notes
     } catch (error){
         console.log("error when creating note:", error)
     }
